@@ -1,164 +1,105 @@
-# Sign-Up Flow Optimization Analysis
+# Nova Shop Sales Analysis Dashboard (Excel)
 
-![Signup Flow Dashboard](EDA_Images/Story_dashboard_gif.gif)
+![Sales Dashboard](EDA_Images/gif.gif)
 
 ## Overview
 
-This project delivers a comprehensive analysis of the **user sign-up flow**, focusing on error patterns, device-level performance, and platform-specific drop-offs.  
-The goal is to understand where users struggle during registration and identify opportunities to increase **visitor-to-free conversion rates**.
+This project presents a **business-focused sales analysis** built in Microsoft Excel to evaluate **revenue performance, customer purchasing behavior, product contribution, and return impact** for a retail business.
 
-The findings are derived from actual platform event data under the **365 platform**, highlighting both technical and behavioral friction points within the sign-up process.
+The analysis is based on transactional sales data spanning **December 2010 to December 2011**. Rather than treating the dataset as “clean by default,” the project explicitly addresses **real-world data issues** such as cancellations, returns, and missing customer identifiers. The resulting dashboard provides both **high-level performance insights** and the ability to drill down by country.
 
-### 📁 Analysis File  
 Access the full analysis report here:  
-[Analysis Report.pdf](Analysis_report/Analysis%20Report.pdf)
+[Analysis_report.pdf](Analysis_report/Analysis_report.pdf)
 
 ---
 
-## Tools & Techniques
+## Tools & Techniques Used (Excel)
 
-This project leveraged:
-
-- **📊 Exploratory data analysis (EDA)**
-- **📈 Funnel performance review**
-- **❗ Error pattern segmentation**
-- **📱 Device & OS–level behavior analysis**
-- **🧩 Sign-up method comparison (Google, Facebook, LinkedIn)**
-
----
-
-## Dataset Description
-
-The dataset includes detailed user behavior logs related to:
-
-- **🔐 Sign-up attempts & retry events**
-- **📱 Device type (Desktop / Mobile)**
-- **🖥️ Operating system distribution**
-- **🔗 Social sign-up methods (Google, Facebook, LinkedIn)**
-- **📧 Email input errors & password failures**
-- **🚫 Closed pop-ups and other external interruptions**
-
-This foundation enabled a clear picture of why sign-ups fail, and where optimizations can be made.
+- Power Query for ETL
+- Pivot Tables & Pivot Charts for aggregation  
+- Calculated fields & helper columns for business logic  
+- Slicers & filters for interactive analysis  
+- Time-based analysis (monthly trends, MoM% growth, hourly patterns)  
+- Data cleaning logic for returns and cancellations  
 
 ---
 
-## Sign-Up Flow Findings
+## Sales Performance Analysis
 
-### 📊 Sign-Up Failure Trends
+### Overall Revenue Performance
+![Month](EDA_Images/month.jpg)
 
-#### **1. Device-Level Failure Rates (Bar Chart)**
+- **Gross Sales** represent total transactional value, including returns.  
+- **Net Sales** reflect actual realized revenue after accounting for returned products.
 
-![Device Failure Rates](EDA_Images/Devices.png)
+This distinction highlights the **true financial performance** of the business rather than inflated topline figures.
 
-- **Desktop Failure Rate:** 1.16%  
-- **Mobile Failure Rate:** 3.24%  
-- **Insight:** Mobile users struggle significantly more, mainly due to data entry issues.
+### Seasonal & Time-Based Trends
+![Hour](EDA_Images/Hour.jpg)
 
----
-
-#### **2. OS-Wise Performance**
-
-![OS Performance](EDA_Images/most_OS_used.png)
-
-- **Highest failed attempts:** **Android — 2,309 fails**  
-- **Highest successful retries:** **Android — 4,077 retries**  
-- **Insight:** Android users face the most difficulty but are also the most persistent.
+- Monthly analysis shows clear **seasonality**, with sales peaking in **Q4**, particularly **November**.
+- Month-over-Month (MoM) growth reveals acceleration toward the end of the year, indicating strong demand during the holiday period.
+- Hourly sales analysis indicates that **most revenue is generated between 9 AM and 3 PM**, suggesting optimal windows for promotions and staffing.
 
 ---
 
-#### **3. Sign-Up Method Comparison**
+## Product Performance Insights
+![Product](EDA_Images/Products.jpg)
 
-![Signup Method Comparison](EDA_Images/Signup_types.png)
+- Products were analyzed using **both units sold and revenue contribution**.
+- Several products generate **high revenue despite lower sales volume**, indicating premium or high-value items.
+- Conversely, some high-volume products contribute relatively less to total revenue.
 
-| Method     | Success Rate | Fail Rate |
-|------------|--------------|-----------|
-| Google     | 91%          | 3.2%      |
-| LinkedIn   | 87%          | —         |
-| Facebook   | 69%          | 7.6%      |
-| Email      | 65%          | 6.2%      |
-
-- 💡 **Google has the lowest failure rate and highest preference.**  
-- ⚠️ **Email has the most friction**, especially on mobile.
+This contrast supports **pricing, inventory, and promotional strategy decisions**, ensuring focus is not placed solely on volume-based performance.
 
 ---
 
-### 📱 Email Input Issues (Major Pain Point)
+## Customer & Order Analysis
+![Customer](EDA_Images/Customers.jpg)
 
-![Email Errors](EDA_Images/signup_errors.png)
+- **Total Orders** capture purchasing activity and transaction frequency.
+- **Average Order Value (AOV)** highlights customer spending behavior.
+- The analysis shows that **high revenue is not always driven by high order counts**—some customers place fewer but significantly higher-value orders.
 
-- **Total email fails:** 1,508  
-- **Email fails on mobile:** 1,273  
-- **85% of email errors related to incorrect input fields**  
-  → Users struggle to type email details on smaller screens.
-
----
-
-### 🔄 Pop-up Issues & External Factors
-
-![Popup Issues](Analysis_Images/Popup_Issues.png)
-
-- **Google pop-ups closed prematurely:** 778 users  
-- **Facebook unknown errors:** 349  
-- **Windows & Android account for most Google-related errors (11,598)**  
-- **11,460 errors specifically indicate “popup closed by user”**
-
-These highlight common **external-interruption failures** affecting conversions.
+This insight reinforces the importance of tracking **orders alongside revenue**, as removing order metrics would hide the contribution of high-value purchasing behavior.
 
 ---
 
-## Business Objective
+## Country-Level Insights
+![Country](EDA_Images/Country.jpg)
 
-The primary aim is to **boost visitor-to-free conversion rate**, contributing to a larger pool of registered free users and supporting long-term business growth.
-
----
-
-## Hypothesis
-
-> **If social media sign-up options are given more prominence on the webpage, the visitor-to-free conversion rate will increase, resulting in more free registered users.**
-
-Based on user behavior, social sign-ups (Google/LinkedIn) outperform email in both popularity and success rate, supporting this hypothesis.
+- Sales are highly concentrated in a few countries, with the top-performing country contributing a significant share of total revenue.  
+- Several countries show strong revenue despite relatively fewer customers, indicating higher average order values.  
+- Some regions record sales without customer attribution due to missing `CustomerID`, suggesting data quality limitations rather than absence of demand.  
+- When filtered by country, the dashboard shifts from a global overview to a focused regional performance analysis, enabling deeper geographic insights.
 
 ---
 
-## Opportunity Sizing
+## Returns & Operational Insights
 
-### 📈 Expected Impact of Highlighting Social Sign-Ups
+- Returns have a **material impact on net sales**, making them critical for performance evaluation.
+- Analyzing returns separately prevents distortion of:
+- Revenue trends  
+- Customer value metrics  
+- Product rankings  
 
-- **Anticipated lift:** +10% to current conversion rate  
-- **Conversion improvement:** from **3.2% → ~3.52%**  
-- **Estimated additional users:** **+3,587 free registrations** (at current traffic levels)
-
-### 💰 Revenue Forecast (Per 10,000 Visitors)
-
-- **+14 additional paid users** expected  
-- **At $30 per subscription:** **+$420 additional revenue**  
-- **Long-term scaling:** Significant cumulative gain across quarters.
+Return behavior can indicate:
+- Product quality issues  
+- Expectation mismatches  
+- Logistics or fulfillment challenges  
 
 ---
 
-## Actionable Insights
+## Key Business Takeaways
 
-### ✔ 1. Emphasize Social Sign-Up Options  
-Highlight Google & LinkedIn more prominently (low failure rates & higher user preference).
-
-### ✔ 2. Simplify Email Sign-Up  
-Reduce friction by optimizing field inputs and reducing complexity on mobile.
-
-### ✔ 3. Relax Strict Password Requirements  
-High rejection suggests that overly strict rules contribute to drop-offs.
-
-### ✔ 4. Improve Password Restoration Flow  
-Make recovery simpler to reduce abandonment at login.
-
-### ✔ 5. Investigate Facebook “Unknown Errors”  
-Identify root causes of the 349 unexplained failures to patch inconsistencies.
+- Revenue is highly seasonal, with **Q4** driving a disproportionate share of sales  
+- **High-value products** and **customers** play a crucial role despite lower transaction counts  
+- Returns significantly affect net performance and must be monitored explicitly  
+- Sales activity is concentrated in predictable daily time windows  
 
 ---
 
 ## Conclusion
 
-This analysis identifies substantial friction in the sign-up flow, especially in mobile email registration and pop-up interruptions.  
-By simplifying the email journey and elevating the visibility of higher-performing social sign-up methods, the platform can meaningfully improve conversion rates, grow its free-user base, and gain incremental revenue.
-
----
+This analysis highlights where revenue is truly coming from, how returns impact net performance, and which products, customers, and countries drive the most value. Clear seasonality and time-based patterns reveal opportunities for better planning and targeted sales strategies. Overall, the insights support more informed decisions around product focus, customer prioritization, and revenue optimization.
 
